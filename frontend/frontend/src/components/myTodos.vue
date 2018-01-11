@@ -13,17 +13,30 @@
 </template>
 
 <script>
-import todo from '@/components/todo'
+import Todo from '@/components/todo'
 import axios from 'axios'
 
 export default {
   name: 'myTodos',
   components: {
-    todo
+    Todo
   },
   data () {
     return {
-      todos: []
+      todos: [
+        {
+          title: 'AAAA',
+          content: 'aaaa'
+        },
+        {
+          title: 'BBBB',
+          content: 'bbbb'
+        },
+        {
+          title: 'CCCC',
+          content: 'cccc'
+        }
+      ]
     }
   },
   created () {

@@ -1,16 +1,16 @@
 <template>
-  <tr :key="key">
+  <tr>
     <td>{{ title }}</td>
-    <td>{{ percent }}</td>
+    <td>{{ content }}</td>
   </tr>
 </template>
 
 <script>
 export default {
-  name: 'todo',
+  name: 'Todo',
   props: [
     'title',
-    'percent',
-    'key'
+    'content'
   ]
 }
+</script>

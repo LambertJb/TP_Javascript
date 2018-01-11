@@ -1,5 +1,6 @@
 <template>
   <div class="row" id="myForm">
+    <router-link to="/" tag="button">Retour à l'accueil</router-link>
     <div class="col offset-s3 s6">
       <input type="text" id="title" v-model="title"/>
       <label for="title">Titre</label>
@@ -25,15 +26,10 @@ export default {
   },
   methods: {
     submitForm () {
-      // console.log(this.title, this.content)
-      axios.post('http://localhost:3000/ajouter', this.title, { headers: {
-        'Content-type': 'application/x-www-form-urlencoded'
-      }})
-      .then(response => {
-        console.log(response)
-      }).catch(e => {
-        console.log(e)
-      })
+      var params = new URLSearchParams()
+      params.append('title', this.title)
+      params.append('content', this.content)
+      axios.post('http://localhost:3000/ajouter', params, {withCredentials: true})
     }
   }
 }

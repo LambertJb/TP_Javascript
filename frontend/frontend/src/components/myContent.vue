@@ -1,5 +1,6 @@
 <template>
   <div id="content">
+      <router-link to="/ajouter" tag="button">Ajouter une todo</router-link>
       <myTodos></myTodos>
   </div>
 </template>

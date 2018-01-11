@@ -1,14 +1,14 @@
 var ajouter = function(req,res){
     console.log(req.body);
     req.session.todosList.todos.push(req.body);
-    res.send("Ajout effectué");
+    console.log(req.session.todosList);
 };
 
 var supprimer = function(req,res){
     var id = req.params.id;
     var size = req.session.todosList.todos.length;
     if ( id < size && id >= 0 ) {
-        
+
         req.session.todosList.todos.splice(id);
         res.send("suppression effectuée");
     }else {
