@@ -1,7 +1,11 @@
 <template>
   <div id="content">
-      <router-link to="/ajouter" tag="button">Ajouter une todo</router-link>
-      <myTodos></myTodos>
+    <nav>
+      <router-link to="/ajouter">Ajouter une todo</router-link>
+    </nav>
+      <span>
+        <myTodos></myTodos>
+      </span>
   </div>
 </template>
 <script>
@@ -16,7 +20,11 @@ export default {
 </script>
 
 <style>
+nav {
+  background-color: rgb(100, 100, 100) !important;
+  font-weight: bold;
+}
 #content{
-  min-height: 500px;
+  margin-top: 140px;
 }
 </style>

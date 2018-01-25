@@ -1,7 +1,5 @@
 var ajouter = function(req,res){
-    console.log(req.body);
     req.session.todosList.todos.push(req.body);
-    console.log(req.session.todosList);
 };
 
 var supprimer = function(req,res){
@@ -9,16 +7,16 @@ var supprimer = function(req,res){
     var size = req.session.todosList.todos.length;
     if ( id < size && id >= 0 ) {
 
-        req.session.todosList.todos.splice(id);
-        res.send("suppression effectuée");
+        req.session.todosList.todos.splice(id,1);
+        res.send(true);
     }else {
-    	res.send("suppression échouée");
+    	res.send(false);
     }
 };
 
 var pagination = function(req,res){
-    var premier = req.params.premier;
-    var nbParPage = req.params.nbParPage;
+    var premier = req.params.offset;
+    var nbParPage = req.params.size;
     var size = req.session.todosList.todos.length;
     var todos = {todos: []}
     if ( premier >= 0 && premier <= size - 1 && nbParPage > 0 && (premier + nbParPage) <= size ) {

@@ -12,10 +12,14 @@ export default {
 
 <style>
 #footer {
+  width:100%;
+  position: fixed;
+  bottom: 0px;
   text-align: center;
-  background-color: rgb(72, 133, 255);
+  background-color: rgb(91, 152, 216);
   color: white;
-  height: 60px;
+  height: 80px;
+  padding-top: 7px;
 }
 
 </style>

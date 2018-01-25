@@ -4,14 +4,21 @@ var bodyParser = require('body-parser');
 var todos = require('./todosList.js');
 var cors = require('cors');
 
-var corsOption = {
-    origin: 'http://localhost:8080',
-    credentials: true,
-    optionsSuccessStatus: 200
-  }
+var corsOptions = {
+  origin: true,
+  credentials: true,
+  optionsSuccessStatus: 200
+}
 
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(session({secret:'mysecrettoken'}));
+app.use(cors(corsOptions));
+
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+app.use(session({
+  secret:'mysecrettoken',
+  resave: false,
+  saveUnitialized: true
+}));
 
 app.use(function( req, res, next){
     if(!req.session.todosList){
@@ -21,23 +28,26 @@ app.use(function( req, res, next){
     next();
 });
 
-app.get('/afficher/:premier/:nbParPage', function(req,res){
+app.get('/afficher/:offset/:size', function(req,res){
     var todosList = todos.pagination(req,res);
     res.send(todosList);
 });
 
 app.get('/', function(req,res){
-    console.log(req.session.todosList.todos);
     res.send(req.session.todosList);
 });
 
-app.post('/ajouter',cors(corsOption),function(req,res){
-    console.log(req.body);
-    req.session.todosList.todos.push(req.body);
-    console.log(req.session.todosList);
+app.get('/getTodoById/:id', function(req,res) {
+  var id = req.params.id;
+  res.send(req.session.todosList.todos[id]);
+})
+
+app.post('/ajouter',function(req,res){
+    todos.ajouterTodos(req,res);
+    res.send('good!');
 });
 
-app.get('/supprimer/:id', function(req, res){
+app.delete('/supprimer/:id', function(req, res){
         todos.supprimerTodos(req,res);
 });
 

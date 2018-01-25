@@ -1,15 +1,15 @@
 <template>
-  <table>
-    <thead>
-      <tr>
-        <th>Titre</th>
-        <th>Contenu</th>
-      </tr>
-    </thead>
-    <tbody>
-      <todo v-for="(todo,key) in todos" :title="todo.title" :content="todo.content" :key="key"></todo>
-    </tbody>
-  </table>
+  <div id="todoList">
+    <div class="row">
+      <div class="col s6">
+        <p>TITRE</p>
+      </div>
+      <div class="col s6">
+        <p>ACTION</p>
+      </div>
+    </div>
+    <todo v-for="(todo,key) in todos" :title="todo.title" :content="todo.content" :key="key" :index="key" :todosList="todos"></todo>
+  </div>
 </template>
 
 <script>
@@ -23,26 +23,13 @@ export default {
   },
   data () {
     return {
-      todos: [
-        {
-          title: 'AAAA',
-          content: 'aaaa'
-        },
-        {
-          title: 'BBBB',
-          content: 'bbbb'
-        },
-        {
-          title: 'CCCC',
-          content: 'cccc'
-        }
-      ]
+      todos: []
     }
   },
   created () {
-    axios.get('http://localhost:3000/')
+    axios.get('http://localhost:3000/', {withCredentials: true})
       .then(response => {
-        console.log(response.data.todos)
+        this.todos = response.data.todos
       })
       .catch(error => {
         console.log(error)
@@ -50,3 +37,13 @@ export default {
   }
 }
 </script>
+
+<style>
+p {
+  font-weight: bold !important;
+}
+#todoList {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+</style>
