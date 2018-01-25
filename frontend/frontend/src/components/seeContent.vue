@@ -1,13 +1,7 @@
 <template>
   <div id="seeContent">
       <div class="row">
-        <div class="col s12 m8 offset-m2">
-          <div class="card blue-grey darken-1">
-            <div class="card-content white-text">
               <p>{{content}}</p>
-            </div>
-          </div>
-        </div>
       </div>
       <router-link :to="{path: '/'}" >Retour à l'accueil !</router-link>
     </div>
